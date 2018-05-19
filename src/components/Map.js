@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { mapStyles } from "./../data/mapStyles.js";
 // const { compose, withProps, withStateHandlers } = require("recompose");
 const { compose, withStateHandlers } = require("recompose");
 const {
@@ -29,12 +30,19 @@ class Map extends Component {
   };
 
   render() {
+    const mapOptions = {
+      styles: mapStyles
+    };
     const MapWithAMakredInfoWindow = compose(
       withStateHandlers(),
       withScriptjs,
       withGoogleMap
     )(props => (
-      <GoogleMap defaultZoom={13} defaultCenter={this.state.currentLocation}>
+      <GoogleMap
+        defaultZoom={16}
+        defaultCenter={this.state.currentLocation}
+        options={mapOptions}
+      >
         {this.props.locations.map((location, i) => (
           <Marker
             key={location.key}
