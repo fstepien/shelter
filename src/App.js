@@ -40,10 +40,6 @@ class App extends Component {
     });
   }
 
-  testLog = () => {
-    console.log("test log");
-  };
-
   render() {
     return (
       <BrowserRouter>
@@ -52,9 +48,7 @@ class App extends Component {
             exact
             path="/"
             // component={Public}
-            render={() => (
-              <Public locations={this.state.locations} testLog={this.testLog} />
-            )}
+            render={() => <Public locations={this.state.locations} />}
           />
           <Route exact path="/Admin" component={Admin} />
           <Route

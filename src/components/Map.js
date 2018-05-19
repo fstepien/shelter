@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-const { compose, withProps, withStateHandlers } = require("recompose");
-const FaAnchor = require("react-icons/lib/fa/anchor");
+// const { compose, withProps, withStateHandlers } = require("recompose");
+const { compose, withStateHandlers } = require("recompose");
 const {
   withScriptjs,
   withGoogleMap,
@@ -10,25 +10,31 @@ const {
 } = require("react-google-maps");
 
 class Map extends Component {
+  state = {
+    currentLocation: { lat: 43.64918, lng: -79.397859 }
+  };
+
+  componentDidMount() {
+    navigator.geolocation.getCurrentPosition(geoData => {
+      const { latitude, longitude } = geoData.coords;
+      this.setCurrentLocation(latitude, longitude);
+    });
+  }
+
+  setCurrentLocation = (latitude, longitude) => {
+    const currentLocation = { ...this.state.currentLocation };
+    currentLocation.lat = latitude;
+    currentLocation.lng = longitude;
+    this.setState({ currentLocation });
+  };
+
   render() {
     const MapWithAMakredInfoWindow = compose(
-      withStateHandlers(
-        () => ({
-          isOpen: false
-        }),
-        {
-          onToggleOpen: ({ isOpen }) => () => ({
-            isOpen: !isOpen
-          })
-        }
-      ),
+      withStateHandlers(),
       withScriptjs,
       withGoogleMap
     )(props => (
-      <GoogleMap
-        defaultZoom={16}
-        defaultCenter={{ lat: 43.64918, lng: -79.397859 }}
-      >
+      <GoogleMap defaultZoom={13} defaultCenter={this.state.currentLocation}>
         {this.props.locations.map((location, i) => (
           <Marker
             key={location.key}
@@ -36,13 +42,17 @@ class Map extends Component {
               lat: location.latitude,
               lng: location.longitude
             }}
-            onClick={() => this.props.toggleLocationsActive(location.key)}
+            onClick={() => {
+              this.props.toggleLocationsActive(location.key);
+              // this.setCurrentLocation(location.latitude, location.longitude);
+            }}
           >
-            {this.props.locationsActive[i] && this.props.locationsActive[i][location.key].active && (
-              <InfoWindow onCloseClick={props.onToggleOpen}>
-                <div>{location.orgName}</div>
-              </InfoWindow>
-            )}
+            {this.props.locationsActive[i] &&
+              this.props.locationsActive[i][location.key].active && (
+                <InfoWindow onCloseClick={props.onToggleOpen}>
+                  <div>{location.orgName}</div>
+                </InfoWindow>
+              )}
           </Marker>
         ))}
       </GoogleMap>
