@@ -1,12 +1,26 @@
 Shelter
 =======
 
+#### Location Information
+
+Availability is only displayed if it has been updated within 16 hours, informaiton such as address, hours, eligibility, phone, website are only displayed when available. 
+
+```
+          {currentLocation.time > Date.now() - 57600000 && (
+            <span className="location-info-value">
+                ...
+              </span>
+            </p>
+          )}
+```
+
+
 
 #### Location Filtering
 
 Locations are filtered twice before they are rendered onto the page: 
 
-First, filtering the eligbility array from the data against the object that holds check box filter information: 
+First, filtering the eligbility array from the data against the object that holds check box filter information:
 
 ```
     let eligibilityFiltered = Object.values(this.state.filter).every(
@@ -14,9 +28,12 @@ First, filtering the eligbility array from the data against the object that hold
     )
       ? this.props.locations
       : this.props.locations.filter(location => {
-          return location.eligibility.some(item => this.state.filter[item]);
+          return location.eligibility.some(
+            item => this.state.filter[item.replace(/ .*/, "")]
+          );
         });
 ```
+Note: The regex is used as to extract first word from string.
 
 Secondly, a check is made to see if any of the text in the search bar matches location.orgName: 
 

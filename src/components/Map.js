@@ -57,7 +57,11 @@ class Map extends Component {
           >
             {location.key === this.props.activeKey && (
               <InfoWindow onCloseClick={props.onToggleOpen}>
-                <div>{location.orgName}</div>
+                <div>
+                  {location.orgName}
+                  {location.orgName !== location.programName &&
+                    "/" + location.programName}
+                </div>
               </InfoWindow>
             )}
           </Marker>

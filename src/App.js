@@ -50,7 +50,11 @@ class App extends Component {
             // component={Public}
             render={() => <Public locations={this.state.locations} />}
           />
-          <Route exact path="/Admin" component={Admin} />
+          <Route
+            exact
+            path="/Admin"
+            render={() => <Admin locations={this.state.locations} />}
+          />
           <Route
             exact
             path="/Operations"

@@ -44,14 +44,18 @@ class Public extends Component {
     )
       ? this.props.locations
       : this.props.locations.filter(location => {
-          return location.eligibility.some(item => this.state.filter[item]);
+          return location.eligibility.some(
+            item => this.state.filter[item.replace(/ .*/, "")]
+          );
         });
     //Check if there is a match with the search box
 
-    console.log(eligibilityFiltered);
     let filteredLocations = eligibilityFiltered.filter(location => {
       return (
         location.orgName
+          .toLowerCase()
+          .indexOf(this.state.search.toLowerCase()) !== -1 ||
+        location.programName
           .toLowerCase()
           .indexOf(this.state.search.toLowerCase()) !== -1
       );
@@ -87,9 +91,9 @@ class Public extends Component {
               onChange={this.updateSearch.bind(this)}
             />
           </label>
-          {/* <button onClick={() => this.setState({ search: "" })}>
+          <button onClick={() => this.setState({ search: "" })}>
             Clear Search
-          </button> */}
+          </button>
         </div>
       </div>
     );

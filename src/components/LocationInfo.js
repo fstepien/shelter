@@ -7,15 +7,17 @@ class LocationInfo extends Component {
       <React.Fragment>
         <div className="location-info">
           <h3>{currentLocation.orgName}</h3>
-          {/* add code so Availability is only shown if updated within 12 or 24  hours */}
-          <p>
-            <span className="location-info-label">Availability: </span>
-            <span className="location-info-value">
-              {currentLocation.CAPACITY - currentLocation.OCCUPANCY} of{" "}
-              {currentLocation.CAPACITY} beds. last udpated:{" "}
-              {currentLocation.udpated}
-            </span>
-          </p>
+          {/* Availability is only shown if updated within 16 hours */}
+          {currentLocation.time > Date.now() - 57600000 && (
+            <p>
+              <span className="location-info-label">Availability: </span>
+              <span className="location-info-value">
+                {currentLocation.CAPACITY - currentLocation.OCCUPANCY} of{" "}
+                {currentLocation.CAPACITY} beds. last udpated:{" "}
+                {currentLocation.updated}
+              </span>
+            </p>
+          )}
           <p>
             <span className="location-info-label">Address: </span>
             <span className="location-info-value">
