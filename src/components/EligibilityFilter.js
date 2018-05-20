@@ -9,8 +9,8 @@ class EligibilityFilter extends Component {
             <input
               name="men"
               type="checkbox"
-              checked={true}
-              onChange={() => this.props.handleCheckboxChange()}
+              checked={this.props.filter.men}
+              onChange={e => this.props.handleCheckboxChange(e)}
             />
             Men
           </label>
@@ -18,8 +18,8 @@ class EligibilityFilter extends Component {
             <input
               name="women"
               type="checkbox"
-              checked={true}
-              onChange={() => this.props.handleCheckboxChange()}
+              checked={this.props.filter.women}
+              onChange={e => this.props.handleCheckboxChange(e)}
             />
             Women
           </label>
@@ -27,17 +27,17 @@ class EligibilityFilter extends Component {
             <input
               name="youth"
               type="checkbox"
-              checked={true}
-              onChange={() => this.props.handleCheckboxChange()}
+              checked={this.props.filter.youth}
+              onChange={e => this.props.handleCheckboxChange(e)}
             />
             Youth
           </label>
           <label>
             <input
-              name="mixed adult"
+              name="mixed"
               type="checkbox"
-              checked={true}
-              onChange={() => this.props.handleCheckboxChange()}
+              checked={this.props.filter.mixed}
+              onChange={e => this.props.handleCheckboxChange(e)}
             />
             Mixed Adult
           </label>
@@ -45,8 +45,8 @@ class EligibilityFilter extends Component {
             <input
               name="family"
               type="checkbox"
-              checked={true}
-              onChange={() => this.props.handleCheckboxChange()}
+              checked={this.props.filter.family}
+              onChange={e => this.props.handleCheckboxChange(e)}
             />
             Family
           </label>
@@ -54,8 +54,8 @@ class EligibilityFilter extends Component {
             <input
               name="other"
               type="checkbox"
-              checked={true}
-              onChange={() => this.props.handleCheckboxChange()}
+              checked={this.props.filter.other}
+              onChange={e => this.props.handleCheckboxChange(e)}
             />
             Other
           </label>

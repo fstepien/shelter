@@ -52,15 +52,14 @@ class Map extends Component {
             }}
             onClick={() => {
               this.props.toggleLocationsActive(location.key);
-              // this.setCurrentLocation(location.latitude, location.longitude);
+              this.setCurrentLocation(location.latitude, location.longitude);
             }}
           >
-            {this.props.locationsActive[i] &&
-              this.props.locationsActive[i][location.key].active && (
-                <InfoWindow onCloseClick={props.onToggleOpen}>
-                  <div>{location.orgName}</div>
-                </InfoWindow>
-              )}
+            {location.key === this.props.activeKey && (
+              <InfoWindow onCloseClick={props.onToggleOpen}>
+                <div>{location.orgName}</div>
+              </InfoWindow>
+            )}
           </Marker>
         ))}
       </GoogleMap>
