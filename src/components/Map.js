@@ -76,7 +76,7 @@ class Map extends Component {
         <MapWithAMakredInfoWindow
           googleMapURL="https://maps.googleapis.com/maps/api/js?key=AIzaSyB-_GBwR4R1xZT8QnV1q1ph88yH1VeylfI&v=3.exp&libraries=geometry,drawing,places"
           loadingElement={<div style={{ height: `100%` }} />}
-          containerElement={<div style={{ height: `400px` }} />}
+          containerElement={<div style={{ height: `50vh` }} />}
           mapElement={<div style={{ height: `100%` }} />}
         />
       </React.Fragment>

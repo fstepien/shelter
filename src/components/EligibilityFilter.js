@@ -3,7 +3,13 @@ import React, { Component } from "react";
 class EligibilityFilter extends Component {
   render() {
     return (
-      <React.Fragment>
+      <div
+        className={
+          this.props.sidebar
+            ? "eligibility-form-open eligibility-form"
+            : "eligibility-form-closed eligibility-form"
+        }
+      >
         <form>
           <label>
             <input
@@ -60,7 +66,7 @@ class EligibilityFilter extends Component {
             Other
           </label>
         </form>
-      </React.Fragment>
+      </div>
     );
   }
 }

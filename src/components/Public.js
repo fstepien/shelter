@@ -2,6 +2,9 @@ import React, { Component } from "react";
 import Map from "./Map";
 import EligibilityFilter from "./EligibilityFilter";
 import LocationInfo from "./LocationInfo";
+import CentralIntake from "./CentralIntake";
+import Chart from "./Chart";
+import { clear, filter } from "./../assets/icons";
 
 class Public extends Component {
   state = {
@@ -15,7 +18,8 @@ class Public extends Component {
       family: false,
       other: false
     },
-    search: ""
+    search: "",
+    sidebar: false
   };
 
   toggleLocationsActive = locationKey => {
@@ -62,40 +66,63 @@ class Public extends Component {
     });
 
     return (
-      <div>
-        <p>This is the Public Component</p>
+      <React.Fragment>
+        <section className="main-section">
+          <div
+            className={
+              this.state.sidebar
+                ? "main-section-info-open"
+                : "main-section-info-closed"
+            }
+          >
+            <header>
+              <div className="main-section-wrap wrap80">
+                <h1>Shelter Watch</h1>
+                <div className="search-box">
+                  <label for="search" className="visuallyhidden">
+                    {" "}
+                    Search by Name:
+                  </label>
+                  <input
+                    id="serach"
+                    name="search"
+                    type="text"
+                    value={this.state.search}
+                    placeholder="Search Shelters"
+                    onChange={this.updateSearch.bind(this)}
+                  />
 
-        <Map
-          locations={filteredLocations}
-          activeKey={this.state.activeKey}
-          locationsActive={this.state.locationsActive}
-          toggleLocationsActive={this.toggleLocationsActive}
-        />
-        {currentLocation && <LocationInfo currentLocation={currentLocation} />}
-        <div className="central-intake">
-          <a href="tel:+1-416-338-4766">Central Intake 416-338-4766</a>
-        </div>
-        <div className="eligibility-filter">
+                  <button onClick={() => this.setState({ search: "" })}>
+                    {clear}
+                  </button>
+                </div>
+              </div>
+            </header>
+
+            <Map
+              locations={filteredLocations}
+              activeKey={this.state.activeKey}
+              locationsActive={this.state.locationsActive}
+              toggleLocationsActive={this.toggleLocationsActive}
+            />
+            <section className="main-info wrap80">
+              {currentLocation && (
+                <React.Fragment>
+                  <LocationInfo currentLocation={currentLocation} />
+                  <Chart currentLocation={currentLocation} />
+                </React.Fragment>
+              )}
+
+              <CentralIntake />
+            </section>
+          </div>
           <EligibilityFilter
+            sidebar={this.state.sidebar}
             filter={this.state.filter}
             handleCheckboxChange={this.handleCheckboxChange}
           />
-        </div>
-        <div className="search-box">
-          <label>
-            {" "}
-            Search by Name:
-            <input
-              type="text"
-              value={this.state.search}
-              onChange={this.updateSearch.bind(this)}
-            />
-          </label>
-          <button onClick={() => this.setState({ search: "" })}>
-            Clear Search
-          </button>
-        </div>
-      </div>
+        </section>
+      </React.Fragment>
     );
   }
 }

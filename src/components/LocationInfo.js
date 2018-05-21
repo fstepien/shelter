@@ -36,16 +36,36 @@ class LocationInfo extends Component {
               ))}
             </span>
           </p>
-          <p>
-            <span className="location-info-label">Eligibility Notes: </span>
-            <span className="location-info-value">
-              {currentLocation.eligibilityNotes}
-            </span>
-          </p>
-          <p>
-            <span className="location-info-label">Phone: </span>
-            <span className="location-info-value">{currentLocation.phone}</span>
-          </p>
+          {currentLocation.eligibilityNotes && (
+            <p>
+              <span className="location-info-label">Eligibility Notes: </span>
+              <span className="location-info-value">
+                {currentLocation.eligibilityNotes}
+              </span>
+            </p>
+          )}
+          {currentLocation.web && (
+            <p>
+              <span className="location-info-label">Phone: </span>
+              <span className="location-info-value">
+                <a
+                  href={"http://" + currentLocation.web}
+                  rel="noopener noreferrer"
+                  target="_blank"
+                >
+                  {currentLocation.web}
+                </a>
+              </span>
+            </p>
+          )}
+          {currentLocation.phone && (
+            <p>
+              <span className="location-info-label">Phone: </span>
+              <span className="location-info-value">
+                {currentLocation.phone}
+              </span>
+            </p>
+          )}
         </div>
       </React.Fragment>
     );

@@ -15,13 +15,13 @@ class Operations extends Component {
 
   updateLocation = activeKey => {
     const status = { ...this.state.status };
-    console.log(activeKey);
+
     const locationIndex = this.props.locations.findIndex(
       location => location.key === activeKey
     );
-    console.log(locationIndex);
+
     status.activeOccupancy = this.props.locations[locationIndex].OCCUPANCY;
-    this.setState({ activeKey });
+    this.setState({ activeKey, status });
   };
 
   updateStatus = e => {

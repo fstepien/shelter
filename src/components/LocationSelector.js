@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 class LocationSelector extends Component {
   render() {
+    const { locations } = this.props;
     return (
       <React.Fragment>
         <select
@@ -10,11 +11,19 @@ class LocationSelector extends Component {
           type="text"
           onChange={e => this.props.updateLocation(e.currentTarget.value)}
         >
-          {this.props.locations.map(location => (
-            <option key={location.key} value={location.key}>
-              {location.orgName}
-            </option>
-          ))}
+          {Object.keys(locations)
+            .sort(
+              (a, b) =>
+                locations[a].orgName.toLowerCase() >
+                locations[b].orgName.toLowerCase()
+                  ? 1
+                  : -1
+            )
+            .map(index => (
+              <option key={locations[index].key} value={locations[index].key}>
+                {locations[index].orgName}
+              </option>
+            ))}
         </select>
       </React.Fragment>
     );
