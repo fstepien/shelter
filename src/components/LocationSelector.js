@@ -7,6 +7,7 @@ class LocationSelector extends Component {
       <React.Fragment>
         <select
           name="location-selector"
+          className="location-selector"
           // ref={this.locationRef}
           type="text"
           onChange={e => this.props.updateLocation(e.currentTarget.value)}

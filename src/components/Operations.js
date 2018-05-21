@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import LocationSelector from "./LocationSelector";
 import LocationInfo from "./LocationInfo";
+import CentralIntake from "./CentralIntake";
 import Add from "react-icons/lib/md/add-circle-outline";
 import Minus from "react-icons/lib/md/remove-circle-outline";
 import firebase from "firebase";
@@ -15,11 +16,9 @@ class Operations extends Component {
 
   updateLocation = activeKey => {
     const status = { ...this.state.status };
-
     const locationIndex = this.props.locations.findIndex(
       location => location.key === activeKey
     );
-
     status.activeOccupancy = this.props.locations[locationIndex].OCCUPANCY;
     this.setState({ activeKey, status });
   };
@@ -55,39 +54,51 @@ class Operations extends Component {
 
     return (
       <React.Fragment>
-        <h1>Shelter Watch / Staff Login</h1>
-        <LocationSelector
-          locations={this.props.locations}
-          updateLocation={this.updateLocation}
-        />
-        {currentLocation && <LocationInfo currentLocation={currentLocation} />}
+        <section className="main-section">
+          <div className="ops-wrap wrap80">
+            <h1>Shelter Watch / Staff Login</h1>
+            <LocationSelector
+              locations={this.props.locations}
+              updateLocation={this.updateLocation}
+            />
+            {currentLocation && (
+              <LocationInfo currentLocation={currentLocation} />
+            )}
 
-        {this.state.activeKey !== "" && (
-          <div className="operations-status">
-            <h3>Ocupancy</h3>
-            <div className="operations-status-occupancy">
-              {this.state.status.activeOccupancy}{" "}
-              <button
-                name="activeOccupancy"
-                value={-1}
-                onClick={this.updateStatus}
-              >
-                <Minus />
+            {this.state.activeKey !== "" && (
+              <div className="operations-status">
+                <div className="operations-status-occupancy">
+                  <h3>Ocupancy</h3>
+                  <div className="status-number">
+                    {this.state.status.activeOccupancy}{" "}
+                  </div>
+                  <div className="buttons">
+                    <button
+                      name="activeOccupancy"
+                      value={-1}
+                      onClick={this.updateStatus}
+                    >
+                      <Minus />
+                    </button>
+                    <button
+                      name="activeOccupancy"
+                      value={1}
+                      onClick={e => this.updateStatus(e)}
+                    >
+                      <Add />
+                    </button>
+                  </div>
+                </div>
+              </div>
+            )}
+            {currentLocation && (
+              <button className="submit-status-btn" onClick={this.submitStatus}>
+                Submit Change
               </button>
-              <button
-                name="activeOccupancy"
-                value={1}
-                onClick={e => this.updateStatus(e)}
-              >
-                <Add />
-              </button>
-            </div>
+            )}
+            <CentralIntake />
           </div>
-        )}
-        <button onClick={this.submitStatus}>Submit Change</button>
-        <div className="central-intake">
-          <a href="tel:+1-416-338-4766">Central Intake 416-338-4766</a>
-        </div>
+        </section>
       </React.Fragment>
     );
   }

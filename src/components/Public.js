@@ -38,6 +38,10 @@ class Public extends Component {
     this.setState({ search: e.target.value });
   };
 
+  toggleFilter = () => {
+    this.setState({ sidebar: !this.state.sidebar });
+  };
+
   render() {
     const currentLocation = this.props.locations.find(
       location => location.key === this.state.activeKey
@@ -67,60 +71,75 @@ class Public extends Component {
 
     return (
       <React.Fragment>
-        <section className="main-section">
-          <div
-            className={
-              this.state.sidebar
-                ? "main-section-info-open"
-                : "main-section-info-closed"
-            }
-          >
-            <header>
-              <div className="main-section-wrap wrap80">
-                <h1>Shelter Watch</h1>
-                <div className="search-box">
-                  <label for="search" className="visuallyhidden">
-                    {" "}
-                    Search by Name:
-                  </label>
-                  <input
-                    id="serach"
-                    name="search"
-                    type="text"
-                    value={this.state.search}
-                    placeholder="Search Shelters"
-                    onChange={this.updateSearch.bind(this)}
-                  />
-
-                  <button onClick={() => this.setState({ search: "" })}>
-                    {clear}
-                  </button>
-                </div>
-              </div>
-            </header>
-
-            <Map
-              locations={filteredLocations}
-              activeKey={this.state.activeKey}
-              locationsActive={this.state.locationsActive}
-              toggleLocationsActive={this.toggleLocationsActive}
-            />
-            <section className="main-info wrap80">
-              {currentLocation && (
-                <React.Fragment>
-                  <LocationInfo currentLocation={currentLocation} />
-                  <Chart currentLocation={currentLocation} />
-                </React.Fragment>
-              )}
-
-              <CentralIntake />
-            </section>
-          </div>
+        {this.state.sidebar && (
           <EligibilityFilter
             sidebar={this.state.sidebar}
             filter={this.state.filter}
             handleCheckboxChange={this.handleCheckboxChange}
+            toggleFilter={this.toggleFilter}
           />
+        )}
+        <section className="main-section">
+          <header>
+            <div className="main-section-wrap wrap80">
+              <h1>Shelter Watch</h1>
+              <div className="search-box">
+                <div className="filter-icon" onClick={this.toggleFilter}>
+                  {filter}
+                </div>
+                <label for="search" className="visuallyhidden">
+                  {" "}
+                  Search by Name:
+                </label>
+                <input
+                  id="serach"
+                  name="search"
+                  type="text"
+                  value={this.state.search}
+                  placeholder="Search Shelters"
+                  onChange={this.updateSearch.bind(this)}
+                />
+
+                <button onClick={() => this.setState({ search: "" })}>
+                  {clear}
+                </button>
+              </div>
+            </div>
+          </header>
+
+          <Map
+            locations={filteredLocations}
+            activeKey={this.state.activeKey}
+            locationsActive={this.state.locationsActive}
+            toggleLocationsActive={this.toggleLocationsActive}
+          />
+          <section className="main-info wrap80">
+            <div className="main-info-chart">
+              {currentLocation ? (
+                <LocationInfo currentLocation={currentLocation} />
+              ) : (
+                <div className="maxH220">
+                  <p className="main-info-start">
+                    Search Map for closest shelter location, click on marker for
+                    shelter availability and details.
+                  </p>
+
+                  <p className="main-info-intro">
+                    Call <a href="tel:311">311</a> or Central Intake at{" "}
+                    <a href="tel:+1-416-338-4766">416-338-4766</a> or
+                    <a href="tel:+ 1-877-338-3398"> 1-877-338-3398</a> for
+                    emergency shelter. Youth and adults can get a walk-in
+                    referral from the Streets to Homes Assessment and Referral
+                    Centre at 129 Peter St (the red map marker red map marker).
+                    The shelters listed can be contacted directly, but may not
+                    have available space.
+                  </p>
+                </div>
+              )}
+              {currentLocation && <Chart currentLocation={currentLocation} />}
+            </div>
+            <CentralIntake />
+          </section>
         </section>
       </React.Fragment>
     );

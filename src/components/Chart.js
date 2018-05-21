@@ -20,16 +20,18 @@ class Chart extends Component {
 
     return (
       <div className="pie-chart">
-        <Pie
-          data={chartData}
-          width={100}
-          height={50}
-          options={{
-            legend: {
-              display: false
-            }
-          }}
-        />
+        <div className="pie-chart-div">
+          <Pie
+            data={chartData}
+            width="250"
+            height="250"
+            options={{
+              legend: {
+                display: true
+              }
+            }}
+          />
+        </div>
       </div>
     );
   }
