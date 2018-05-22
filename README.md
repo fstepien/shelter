@@ -1,6 +1,11 @@
 Shelter
 =======
 
+#### Data Flow 
+
+![](https://meta.shippingdocuments.ca/shelter.svg)
+
+
 #### Location Information
 
 Availability is only displayed if it has been updated within 16 hours, informaiton such as address, hours, eligibility, phone, website are only displayed when available. 
