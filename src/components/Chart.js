@@ -23,8 +23,8 @@ class Chart extends Component {
         <div className="pie-chart-div">
           <Pie
             data={chartData}
-            width="250"
-            height="250"
+            width="220"
+            height="220"
             options={{
               legend: {
                 display: true

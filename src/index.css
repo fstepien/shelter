@@ -330,6 +330,8 @@ a {
 }
 .close-sidebar {
   float: right;
+  position: relative;
+  transform: translateX(8px) translateY(20px);
 }
 .new-checkbox {
   display: inline-block;
@@ -389,9 +391,12 @@ a {
 
 .ops-wrap {
   margin-top: 20px;
+  padding-bottom: 70px;
+  position: relative;
 }
 .operations-status {
-  margin-top: 50px;
+  max-width: 700px;
+  margin: 50px auto 0 auto;
   display: flex;
   flex-flow: row wrap;
   justify-content: space-around;
@@ -403,6 +408,7 @@ a {
   text-align: center;
   padding: 20px 0;
   border-radius: 4px;
+  margin-bottom: 30px;
 }
 
 .location-selector {
@@ -410,6 +416,7 @@ a {
   padding: 0.4rem 2.3rem 0.4rem 1rem;
   border: solid 1px rgba(80, 165, 209, 1);
   border-radius: 5px;
+  max-width: 95%;
 }
 
 .status-number {
@@ -457,6 +464,7 @@ a {
     overflow-x: hidden;
   }
   .main-section {
+    min-height: 100vh;
     height: auto;
     width: 100vw;
     overflow-y: auto;
