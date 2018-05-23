@@ -1,14 +1,22 @@
 Shelter
 =======
 
+[https://shelter.filipstepien.com/](https://shelter.filipstepien.com/)
+
 #### Data Flow 
 
 ![](https://meta.shippingdocuments.ca/shelter.svg)
 
 
+#### Views
+
+The website has a Public View, Operations and Admin view. As shown above the public only receives information from firebase, while the Operations can update the capacity. 
+
+![](https://meta.shippingdocuments.ca/shelter.gif)
+
 #### Location Information
 
-Availability is only displayed if it has been updated within 16 hours, informaiton such as address, hours, eligibility, phone, website are only displayed when available. 
+Availability is only displayed if it has been updated within 16 hours, informaiton such as address, hours, eligibility, phone, website are only displayed when available. This is also the case for the pie chart. 
 
 ```
           {currentLocation.time > Date.now() - 57600000 && (
