@@ -89,6 +89,32 @@ Map has transit markers turned on using `options={styles: mapStyles}` with maSty
     }
 ```
 
+#### Firebase Database Rules
+
+```
+{
+"rules": {
+".read": true,
+"locations": {
+""OCCUPANCY": {
+".write": true
+},
+"time": {
+".write": true
+},
+"updated": {
+".write": true
+},     
+"$other": {
+".write": false
+}
+}
+}
+}
+}
+```
+
+
 #### Lessons Learned
 
 + A web application was chosen for quick access without requiring downloading a mobile app. It was built in React and can be easily transitioned into React Native in the future. 
