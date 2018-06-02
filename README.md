@@ -91,26 +91,28 @@ Map has transit markers turned on using `options={styles: mapStyles}` with maSty
 
 #### Firebase Database Rules
 
+There is a branch with user login intended for Admin and Operation views but for demonstration purposes no login is required. All data is is read only, with the exception of OCCUPANCY and time stamp fields. 
+
 ```
 {
 "rules": {
-".read": true,
-"locations": {
-""OCCUPANCY": {
-".write": true
-},
-"time": {
-".write": true
-},
-"updated": {
-".write": true
-},     
-"$other": {
-".write": false
-}
-}
-}
-}
+  ".read": true,
+  "locations": {
+    ""OCCUPANCY": {
+      ".write": true
+      },
+  "time": {
+      ".write": true
+      },
+  "updated": {
+      ".write": true
+      },     
+  "$other": {
+      ".write": false
+      }
+    }
+  }
+  }
 }
 ```
 
