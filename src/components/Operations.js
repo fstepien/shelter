@@ -68,7 +68,7 @@ class Operations extends Component {
             {this.state.activeKey !== "" && (
               <div className="operations-status">
                 <div className="operations-status-occupancy">
-                  <h3>Ocupancy</h3>
+                  <h3>Occupancy</h3>
                   <div className="status-number">
                     {this.state.status.activeOccupancy}{" "}
                   </div>

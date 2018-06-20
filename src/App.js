@@ -7,7 +7,7 @@ import NotFound from "./components/NotFound";
 import firebase from "firebase";
 
 const config = {
-  apiKey: "AIzaSyDIJ-CqKtcmmBJfzIV9mtDoDTRqqaU1_Yo",
+  apiKey: "AIzaSyB-_GBwR4R1xZT8QnV1q1ph88yH1VeylfI",
   authDomain: "shelter-33632.firebaseapp.com",
   databaseURL: "https://shelter-33632.firebaseio.com",
   projectId: "shelter-33632",

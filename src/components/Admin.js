@@ -6,6 +6,7 @@ import CentralIntake from "./CentralIntake";
 import Add from "react-icons/lib/md/add-circle-outline";
 import Minus from "react-icons/lib/md/remove-circle-outline";
 import firebase from "firebase";
+import Login from "./Login";
 
 class Admin extends Component {
   state = {
@@ -51,11 +52,34 @@ class Admin extends Component {
       .update(locationStatus);
   };
 
+  authHandler = async authData => {
+    console.log(authData);
+    // const id = authData.user.uid;
+    // const userData = await base.fetch(id, { context: this });
+    // if (!userData.id) {
+    //   await base.post(`${id}/id`, {
+    //     data: id
+    //   });
+    // }
+    // this.setState(
+    //   { id }
+    // );
+  };
+
+  authenticate = provider => {
+    const authProvider = new firebase.auth[`${provider}AuthProvider`]();
+    firebase
+      .auth()
+      .signInWithPopup(authProvider)
+      .then(this.authHandler)
+      .catch(err => alert(err.message));
+  };
+
   render() {
     const currentLocation = this.props.locations.find(
       location => location.key === this.state.activeKey
     );
-
+    return <Login authenticate={this.authenticate} />;
     return (
       <React.Fragment>
         <section className="main-section">
@@ -76,7 +100,7 @@ class Admin extends Component {
             {this.state.activeKey !== "" && (
               <div className="operations-status">
                 <div className="operations-status-occupancy">
-                  <h3>Ocupancy</h3>
+                  <h3>Occupancy</h3>
                   <div className="status-number">
                     {this.state.status.activeOccupancy}{" "}
                   </div>

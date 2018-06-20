@@ -456,7 +456,7 @@ a {
 
 /* MEDIA QUERIES 
  */
-@media (max-width: 535px) {
+@media (max-width: 535px), (max-height: 740px) {
   /* HEIGHT ADJUSTMENT */
   #root {
     height: auto;

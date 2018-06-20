@@ -87,7 +87,7 @@ class Public extends Component {
                 <div className="filter-icon" onClick={this.toggleFilter}>
                   {filter}
                 </div>
-                <label for="search" className="visuallyhidden">
+                <label htmlFor="search" className="visuallyhidden">
                   {" "}
                   Search by Name:
                 </label>
@@ -136,7 +136,10 @@ class Public extends Component {
                   </p>
                 </div>
               )}
-              {currentLocation && <Chart currentLocation={currentLocation} />}
+              {currentLocation &&
+                (currentLocation.time > Date.now() - 57600000 && (
+                  <Chart currentLocation={currentLocation} />
+                ))}
             </div>
             <CentralIntake />
           </section>
